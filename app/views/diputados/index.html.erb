@@ -15,8 +15,8 @@
 	<tbody>
 		<% @diputados.each{ |diputado| %>
 			<tr>
-				<td><%= image_tag diputado.url_foto_mediana %></td>
-				<td><%= diputado.apyn %></td>
+				<td><a href="/diputados/ficha/<%= diputado.id %>"><%= image_tag diputado.url_foto_mediana %></a></td>
+				<td><a href="/diputados/ficha/<%= diputado.id %>"><%= diputado.apyn %></a></td>
 				<td><%= diputado.provincia.nombre %></td>
 				<td><%= diputado.bloque_actual.nombre if diputado.bloque_actual %></td>
 				<td>

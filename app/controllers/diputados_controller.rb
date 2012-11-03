@@ -6,5 +6,10 @@ class DiputadosController < ApplicationController
 
 	end #index
 
+	def ficha
+		@diputado = Legislador.find(params[:id])
+
+	end #ficha
+
 
 end
