@@ -3,7 +3,7 @@ class Legislador < ActiveRecord::Base
 
 
 	belongs_to :provincia
-	belongs_to :bloque
+	belongs_to :bloque_actual, :class_name => "Bloque"
 
 	#has_and_belongs_to_many :comisions
 

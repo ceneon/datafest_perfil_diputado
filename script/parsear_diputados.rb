@@ -22,20 +22,30 @@ doc = Nokogiri::HTML(html)
 diputados = []
 
 provincias = [
-	'Buenos Aires', 'Cordoba', 'Santa Fe', 'Mendoza', 'Tucuman', 'Entre Rios', 'Salta', 'Misiones', 'Chaco', 'Corrientes', 'Santiago Del Estero', 'Jujuy', 'San Juan', 'Rio Negro', 'Formosa', 'Neuquen', 'Chubut', 'San Luis', 'Catamarca', 'La Rioja', 'La Pampa', 'Santa Cruz', 'Tierra Del Fuego', 'Ciudad De Buenos Aires'
+	'', 'Buenos Aires', 'Cordoba', 'Santa Fe', 'Mendoza', 'Tucuman', 'Entre Rios', 'Salta', 'Misiones', 'Chaco', 'Corrientes', 'Santiago Del Estero', 'Jujuy', 'San Juan', 'Rio Negro', 'Formosa', 'Neuquen', 'Chubut', 'San Luis', 'Catamarca', 'La Rioja', 'La Pampa', 'Santa Cruz', 'Tierra Del Fuego', 'Ciudad De Buenos Aires'
 ]
 
 puts "Buscando diputados..."
 
 doc.css("#tablaPpal table tbody").children.each{ |row|
 	#diputados << {
+
+	nombre_bloque = row.children.css("td")[5].content
+	bloque = Bloque.where(:nombre => nombre_bloque)
+	if bloque.first
+		bloque_id = bloque.first.id
+	else
+		bloque = Bloque.create(:nombre => nombre_bloque)
+		bloque_id = bloque.id
+	end
+
 	l = Legislador.create(
 		:apellido => row.children.css("td")[1].children.css("a").first.content.split(",").first.strip.capitalize,
 		:nombre => row.children.css("td")[1].children.css("a").first.content.split(",")[1].strip.capitalize,
 		:provincia_id => provincias.index(  row.children.css("td")[2].content.split(" ").collect{ |x| x.capitalize}.join(" ")),
 		:mandato_inicio => Date.strptime( row.children.css("td")[3].content, "%d/%m/%Y"),
 		:mandato_fin => Date.strptime( row.children.css("td")[4].content, "%d/%m/%Y"), 
-		:bloque_actual_id => 0,
+		:bloque_actual_id => bloque_id,
 
 		:es_diputado => true,
 		:es_senador => false,
@@ -51,7 +61,7 @@ doc.css("#tablaPpal table tbody").children.each{ |row|
 puts "Resultados:"; puts "------------------"
 
 Legislador.all.each{ |l| 
-	puts "Nombre: " + l.apellido + ", " + l.nombre + " - Provincia: " + l.provincia.nombre  
+	puts "Nombre: " + l.apellido + ", " + l.nombre + " - Provincia: " + (l.provincia.nombre if l.provincia)
 }
 #diputados.each{|x| puts "Nombre: " + x[:apellido] + " - Prov: " + x[:provincia_id].to_s + ": " + provincias[x[:provincia_id].to_i] }
 #puts diputados.inspect
