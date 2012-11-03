@@ -3,12 +3,66 @@
 <head>
   <title>DatafestPerfilDiputado</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "bootstrap.min", :media => "all" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Tu diputado</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Inicio</a></li>
+              <li><a href="/diputados">Diputados</a></li>
+              <li><a href="#">Provincias</a></li>
+              <li><a href="#">Bloques</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">más cosas <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">una</a></li>
+                  <li><a href="#">otra</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">otra más</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="navbar-form pull-right">
+              
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <br/><br/><br/>
+
+    <div class="container">
+
+		<%= yield %>
+
+      <hr>
+
+      <footer>
+        <p>Hecho en el Datafest 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "rails" %>
+  <%= javascript_include_tag "bootstrap.min" %>
+  
 
 </body>
 </html>

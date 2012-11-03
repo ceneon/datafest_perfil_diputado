@@ -9,7 +9,7 @@ class Legislador < ActiveRecord::Base
 
 	def url_foto_mediana
 		if self.es_diputado? and self.key.present?
-			"http://www1.hcdn.gov.ar/fotos/" + self.key + "_mediana.jpg"
+			"http://www1.hcdn.gov.ar/fotos/" + self.key + "_medium.jpg"
 		elsif self.es_senador?
 			""
 		else
@@ -25,6 +25,10 @@ class Legislador < ActiveRecord::Base
 		else
 			""
 		end
+	end
+
+	def apyn
+		self.apellido + ", " + self.nombre
 	end
 
 end

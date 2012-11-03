@@ -1,0 +1,28 @@
+<h1>Listado de Diputados</h1>
+
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Foto</th>
+			<th>Nombre</th>
+			<th>Provincia</th>
+			<th>Bloque actual</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @diputados.each{ |diputado| %>
+			<tr>
+				<td><%= image_tag diputado.url_foto_mediana %></td>
+				<td><%= diputado.apyn %></td>
+				<td><%= diputado.provincia.nombre %></td>
+				<td><%= diputado.bloque_actual.nombre if diputado.bloque_actual %></td>
+				<td>
+					<a class="btn" href="/diputados/ficha/<%= diputado.id %>">Ver</a>
+				</td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>
