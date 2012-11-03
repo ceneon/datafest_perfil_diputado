@@ -1,19 +1,27 @@
-<h1>Diputados actuales por bloque</h1>
+<h1><%= @titulo %></h1>
 
 
-<% @bloques.each{ |bloque| %>
-	<h2><%= bloque.nombre %></h2>
+<% @bloques.each{ |bloque| 
+	legis = Legislador.where(:es_diputado => true, :bloque_actual_id => bloque.id)
+	if not params[:historico]
+		legis = legis.where(:actual => true)
+	end
+	if legis.size > 0
+	%>
+		<h2><%= bloque.nombre %></h2>
 
-	<div class="row">
-		<% Legislador.where(:es_diputado => true, :bloque_actual_id => bloque.id).each{ |diputado| %>
-			<div class="span3" style="height:150px">
-				<a href="/diputados/ficha/<%= diputado.id %>">
-					<%= image_tag diputado.url_foto_mediana %><br/>
-					<%= diputado.apyn %>
-				</a><br/>
-				<%= diputado.provincia.nombre %>
-			</div>
-		<% } %>
-	</div>
+		<div class="row">
+			<% 
+				legis.each{ |diputado| %>
+				<div class="span3" style="height:150px">
+					<a href="/diputados/ficha/<%= diputado.id %>">
+						<%= image_tag diputado.url_foto_mediana %><br/>
+						<%= diputado.apyn %>
+					</a><br/>
+					<%= diputado.provincia.nombre if diputado.provincia %>
+				</div>
+			<% } %>
+		</div>
+	<% end  %>
 
 <% } %>
