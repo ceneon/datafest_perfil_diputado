@@ -21,6 +21,7 @@ class DiputadosController < ApplicationController
 		@bloques = Bloque.order(:nombre)
 
 		# ordenar por cantidad 
+		#@bloques = @bloques.sort_by{ |x| x.legisladors.size }
 
 		if params[:historico]
 			@titulo = "Listado Histórico de Diputados por bloque"
