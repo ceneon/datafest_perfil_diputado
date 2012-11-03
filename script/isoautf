@@ -1,0 +1,3 @@
+iconv --from-code=ISO-8859-1 --to-code=UTF-8 $1 > temp.nada
+mv temp.nada $1
+
