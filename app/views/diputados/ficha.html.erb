@@ -14,6 +14,10 @@
 
 <p>Provincia: <strong><%= @diputado.provincia.nombre if @diputado.provincia %></strong></p>
 
+<% if @diputado.email %>
+	<p>E-mail: <strong><%= @diputado.email %></strong>
+<% end %>
+
 
 <% if @diputado.fecha_nacimiento %>
 	<p>Fecha de nacimiento: <strong><%= l @diputado.fecha_nacimiento, :format => "%d/%m/%Y" %></strong> - Edad: <strong><%= @diputado.edad %></strong></p>

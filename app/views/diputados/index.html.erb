@@ -17,7 +17,7 @@
 			<tr>
 				<td><a href="/diputados/ficha/<%= diputado.id %>"><%= image_tag diputado.url_foto_mediana %></a></td>
 				<td><a href="/diputados/ficha/<%= diputado.id %>"><%= diputado.apyn %></a></td>
-				<td><%= diputado.provincia.nombre %></td>
+				<td><%= diputado.provincia.nombre if diputado.provincia %></td>
 				<td><%= diputado.bloque_actual.nombre if diputado.bloque_actual %></td>
 				<td>
 					<a class="btn" href="/diputados/ficha/<%= diputado.id %>">Ver</a>
