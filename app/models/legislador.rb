@@ -50,6 +50,11 @@ class Legislador < ActiveRecord::Base
 			Date.today.year - self.fecha_nacimiento.year - (self.fecha_nacimiento.to_date.change(:year => Date.today.year) > Date.today ? 1 : 0)
 		end
 	end
+
+
+	def porcentaje_palabras_anio(anio)
+		100.0* self.palabras.where(:anio => anio).first.cantidad / Palabra.maximo_del_anio(anio)
+	end
 			
 
 end

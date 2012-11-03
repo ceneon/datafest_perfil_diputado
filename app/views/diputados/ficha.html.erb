@@ -24,21 +24,24 @@
 <% end %>
 
 <% if @diputado.palabras.size > 0 %>
-	<ul>
-		<% @diputado.palabras.each{|p| %>
-			<li>Palabras en <%= p.anio %>: <strong><%= p.cantidad %></strong></li>
-		<% } %>
-	</ul>
+<div class="row">
+	<% @diputado.palabras.each{|p| %>
+		<div class="span4">
+			Palabras expresadas en el recinto en <%= p.anio %>
+			<div class="progress" style="margin-bottom:0px">
+				<div class="bar bar-success" style="width: <%= @diputado.porcentaje_palabras_anio(p.anio) %>%;"></div>
+			</div>
+			<strong><%= p.cantidad %></strong>
+		</div>
+	<% } %>
+</div>
 <% end %>
 
+<br/>
+
 <pre>
-Fecha de nacimiento - edad
-
-
 comisiones en que participa (+ rol) (presidente?)
-..
 
-...
 presentismo?
 conducta? vota indep'te o vota como el bloque?
 cuanto habló en cada año?
