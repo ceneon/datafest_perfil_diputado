@@ -1,43 +1,82 @@
 <h1><%= @diputado.apyn %></h1>
-
-<div><%= image_tag @diputado.url_foto_grande %></div>
 <br/>
 
-
-<p>
-	<% if @diputado.es_diputado? %>Diputado<% elsif @diputado.es_senador? %>Senador<% end %> 
-	 - Mandato <strong><%= @diputado.periodo %></strong>
-</p>
-
-
-<p>Bloque actual: <strong><%= @diputado.bloque_actual.nombre if @diputado.bloque_actual %></strong></p>
-
-<p>Provincia: <strong><%= @diputado.provincia.nombre if @diputado.provincia %></strong></p>
-
-<% if @diputado.email %>
-	<p>E-mail: <strong><%= @diputado.email %></strong>
-<% end %>
-
-
-<% if @diputado.fecha_nacimiento %>
-	<p>Fecha de nacimiento: <strong><%= l @diputado.fecha_nacimiento, :format => "%d/%m/%Y" %></strong> - Edad: <strong><%= @diputado.edad %></strong></p>
-<% end %>
-
-<% if @diputado.palabras.size > 0 %>
 <div class="row">
-	<% @diputado.palabras.each{|p| %>
-		<div class="span4">
-			Palabras expresadas en el recinto en <%= p.anio %>
-			<div class="progress" style="margin-bottom:0px">
-				<div class="bar bar-success" style="width: <%= @diputado.porcentaje_palabras_anio(p.anio) %>%;"></div>
+	<div class="span6">
+		<%= image_tag @diputado.url_foto_grande %>
+		
+	</div>
+
+	<div class="span6">
+		<p>
+			<% if @diputado.es_diputado? %>Diputado<% elsif @diputado.es_senador? %>Senador<% end %> 
+			 - Mandato <strong><%= @diputado.periodo %></strong>
+		</p>
+
+		<p>Bloque actual: <strong><%= @diputado.bloque_actual.nombre if @diputado.bloque_actual %></strong></p>
+
+		<p>Provincia: <strong><%= @diputado.provincia.nombre if @diputado.provincia %></strong></p>
+
+		<% if @diputado.email %>
+			<p>E-mail: <strong><%= @diputado.email %></strong>
+		<% end %>
+
+
+		<% if @diputado.fecha_nacimiento %>
+			<p>Fecha de nacimiento: <strong><%= l @diputado.fecha_nacimiento, :format => "%d/%m/%Y" %></strong> - Edad: <strong><%= @diputado.edad %></strong></p>
+		<% end %>
+
+		<% if @diputado.palabras.size > 0 %>
+			<div class="row">
+				<% @diputado.palabras.each{|p| %>
+					<div class="span4">
+						Palabras expresadas en el recinto en <%= p.anio %>
+						<div class="progress" style="margin-bottom:0px">
+							<div class="bar bar-success" style="width: <%= @diputado.porcentaje_palabras_anio(p.anio) %>%;"></div>
+						</div>
+						<strong><%= p.cantidad %></strong>
+					</div>
+				<% } %>
 			</div>
-			<strong><%= p.cantidad %></strong>
-		</div>
-	<% } %>
+		<% end %>
+	</div>
+
 </div>
-<% end %>
 
 <br/>
+
+<div class="row">
+
+<% Categoria.order(:nombre).each{ |c|
+	vc = @diputado.voto_categorias.where(:categoria_id => c.id)
+	if vc.first
+		vc = vc.first
+	%>
+		<div class="span3" style="margin-bottom:10px">
+			Categoría: <strong><%= vc.categoria.nombre %></strong>
+			<div class="progress" style="margin-bottom:0px">
+			  <div class="bar bar-success" style="width: <%= vc.afirmativo %>%;"></div>
+			  <div class="bar bar-warning" style="width: <%= vc.neutro %>%;"></div>
+			  <div class="bar bar-danger" style="width: <%= vc.negativo %>%;"></div>
+			</div>
+			<i class="icon-plus"></i> 
+				<strong><%= vc.afirmativo %>%</strong> &nbsp;
+			<i class="icon-question-sign"></i>
+				<strong><%= vc.neutro %>%</strong> &nbsp;
+			<i class="icon-minus"></i>  
+				<strong><%= vc.negativo %>%</strong>
+		</div>
+	<% end %>
+<% } %>
+
+</div>
+
+
+
+
+
+
+<br/><br/><br/>
 
 <pre>
 comisiones en que participa (+ rol) (presidente?)

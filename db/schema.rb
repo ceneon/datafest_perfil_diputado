@@ -11,9 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121103133751) do
+ActiveRecord::Schema.define(:version => 20121103182455) do
 
   create_table "bloques", :force => true do |t|
+    t.string "nombre"
+  end
+
+  create_table "categorias", :force => true do |t|
     t.string "nombre"
   end
 
@@ -44,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20121103133751) do
 
   create_table "provincias", :force => true do |t|
     t.string "nombre"
+  end
+
+  create_table "voto_categorias", :force => true do |t|
+    t.integer "categoria_id"
+    t.integer "legislador_id"
+    t.integer "afirmativo"
+    t.integer "negativo"
+    t.integer "neutro"
   end
 
 end
