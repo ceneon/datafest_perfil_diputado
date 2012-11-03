@@ -11,5 +11,9 @@ class DiputadosController < ApplicationController
 
 	end #ficha
 
+	def por_bloque
+		@bloques = Bloque.order(:nombre)
+	end #por_bloque
+
 
 end
