@@ -16,7 +16,8 @@ class Legislador < ActiveRecord::Base
 		elsif self.es_senador?
 			""
 		else
-			"/images/avatar_chico.png"
+			"http://www1.hcdn.gov.ar/fotos/" + self.nombre[0] + self.apellido.downcase.gsub(" ", "").gsub("ñ","").gsub("ü","u")[0..8] + "_medium.jpg"
+			#"/images/avatar_chico.png"
 		end
 	end
 
@@ -26,7 +27,8 @@ class Legislador < ActiveRecord::Base
 		elsif self.es_senador?
 			""
 		else
-			"/images/avatar_grande.png"
+			"http://www1.hcdn.gov.ar/fotos/" + self.nombre[0] + self.apellido.downcase.gsub(" ", "").gsub("ñ","").gsub("ü","u")[0..8] + ".jpg"
+			#"/images/avatar_grande.png"
 		end
 	end
 

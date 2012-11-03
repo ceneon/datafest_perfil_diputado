@@ -19,6 +19,9 @@ class DiputadosController < ApplicationController
 
 	def por_bloque
 		@bloques = Bloque.order(:nombre)
+
+		# ordenar por cantidad 
+
 		if params[:historico]
 			@titulo = "Listado Histórico de Diputados por bloque"
 		else
