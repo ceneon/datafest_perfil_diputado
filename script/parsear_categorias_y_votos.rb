@@ -8,7 +8,7 @@ require 'csv'
 
 no_encontrados = 0
 
-CSV.parse(File.read("db/csvs/_____.csv")) do |row|
+CSV.parse(File.read("db/csvs/votos_categ.csv")) do |row|
 
 	apellido = row[0]
 	nombre = row[1]
@@ -30,17 +30,17 @@ CSV.parse(File.read("db/csvs/_____.csv")) do |row|
 			c = Categoria.create(:nombre => nombre_categoria)
 			categoria = c
 		end
-=begin
+
 		VotoCategoria.create(
 			:categoria_id => categoria.id,
-			:legislador_id => l.id
+			:legislador_id => l.id,
 			:afirmativo => row[3],
 			:negativo => row[4],
 			:neutro => row[5],
 		)
-=end		
+	
 	else
-		puts "No se encontró a " + apellido + ", " + nombre + " ; lo agrego!"
+		#puts "No se encontró a " + apellido + ", " + nombre + ""
 		no_encontrados+=1
 	end
 
