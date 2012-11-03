@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102221043) do
+ActiveRecord::Schema.define(:version => 20121103133751) do
 
   create_table "bloques", :force => true do |t|
     t.string "nombre"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20121102221043) do
     t.boolean "es_senador",       :default => false
     t.integer "bloque_actual_id"
     t.string  "key"
+    t.boolean "actual",           :default => false
+    t.string  "email"
+    t.date    "fecha_nacimiento"
+  end
+
+  create_table "palabras", :force => true do |t|
+    t.integer "legislador_id"
+    t.integer "anio"
+    t.integer "cantidad"
   end
 
   create_table "provincias", :force => true do |t|

@@ -3,17 +3,41 @@
 <div><%= image_tag @diputado.url_foto_grande %></div>
 <br/>
 
+
+<p>
+	<% if @diputado.es_diputado? %>Diputado<% elsif @diputado.es_senador? %>Senador<% end %> 
+	 - Mandato <strong><%= @diputado.periodo %></strong>
+</p>
+
+
+<p>Bloque actual: <strong><%= @diputado.bloque_actual.nombre if @diputado.bloque_actual %></strong></p>
+
+<p>Provincia: <strong><%= @diputado.provincia.nombre if @diputado.provincia %></strong></p>
+
+
+<% if @diputado.fecha_nacimiento %>
+	<p>Fecha de nacimiento: <strong><%= l @diputado.fecha_nacimiento, :format => "%d/%m/%Y" %></strong> - Edad: <strong><%= @diputado.edad %></strong></p>
+<% end %>
+
+<% if @diputado.palabras.size > 0 %>
+	<ul>
+		<% @diputado.palabras.each{|p| %>
+			<li>Palabras en <%= p.anio %>: <strong><%= p.cantidad %></strong></li>
+		<% } %>
+	</ul>
+<% end %>
+
 <pre>
 Fecha de nacimiento - edad
-diputado? senador? mandato/s (actual?)
-bloque
-provincia
+
+
 comisiones en que participa (+ rol) (presidente?)
 ..
 
 ...
 presentismo?
 conducta? vota indep'te o vota como el bloque?
+cuanto habló en cada año?
 ...
 
 proyectos presentados
