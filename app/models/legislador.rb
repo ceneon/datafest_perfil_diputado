@@ -15,7 +15,7 @@ class Legislador < ActiveRecord::Base
 		elsif self.es_senador?
 			""
 		else
-			""
+			"/images/avatar_chico.png"
 		end
 	end
 
@@ -25,7 +25,7 @@ class Legislador < ActiveRecord::Base
 		elsif self.es_senador?
 			""
 		else
-			""
+			"/images/avatar_grande.png"
 		end
 	end
 
